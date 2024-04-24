@@ -8,10 +8,10 @@
 		<version>3.2.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.springboot</groupId>
-	<artifactId>JavaSpringbootRESTapiproject</artifactId>
+	<groupId>com.rest</groupId>
+	<artifactId>Java-Springboot-REST-api-project</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>JavaSpringbootRESTapiproject</name>
+	<name>Java-Springboot-REST-api-project</name>
 	<description>Project for developing REST apis in Java Spring boot</description>
 	<properties>
 		<java.version>17</java.version>

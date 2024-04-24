@@ -1,13 +1,13 @@
-package com.springboot.JavaSpringbootRESTapiproject;
+package com.rest.JavaSpringbootRESTapiproject;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JavaSpringbootResTapiprojectApplication {
+public class JavaSpringbootRestApiProjectApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(JavaSpringbootResTapiprojectApplication.class, args);
+		SpringApplication.run(JavaSpringbootRestApiProjectApplication.class, args);
 	}
 
 }
