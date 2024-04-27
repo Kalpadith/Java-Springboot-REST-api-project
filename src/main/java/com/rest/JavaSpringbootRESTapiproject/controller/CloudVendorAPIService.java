@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.rest.JavaSpringbootRESTapiproject.model.CloudVendor;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -21,6 +22,13 @@ public class CloudVendorAPIService {
 	}
 	
 	@PostMapping("/create")
+	public String createCloudVendorDetails(@RequestBody CloudVendor cloudVendor) {
+		
+		this.cloudVendor = cloudVendor;
+		return "Cloud Vendor Created Successfully";
+	}
+	
+	@PutMapping("/update")
 	public String createCloudVendorDetails(@RequestBody CloudVendor cloudVendor) {
 		
 		this.cloudVendor = cloudVendor;
