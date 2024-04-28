@@ -1,12 +1,15 @@
 package com.rest.JavaSpringbootRESTapiproject.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import com.rest.JavaSpringbootRESTapiproject.model.CloudVendor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @RestController
@@ -28,11 +31,23 @@ public class CloudVendorAPIService {
 		return "Cloud Vendor Created Successfully";
 	}
 	
-	@PutMapping("/update")
-	public String createCloudVendorDetails(@RequestBody CloudVendor cloudVendor) {
-		
-		this.cloudVendor = cloudVendor;
-		return "Cloud Vendor Created Successfully";
-	}
+	@PutMapping("/update/{vendorId}")
+    public ResponseEntity<String> updateCloudVendorDetails(@PathVariable("vendorId") String vendorId, @RequestBody CloudVendor cloudVendor) {
+        Optional<CloudVendor> existingVendorOpt = cloudVendors.stream()
+                .filter(cv -> cv.getVendorId().equals(vendorId))
+                .findFirst();
+
+        if (existingVendorOpt.isPresent()) {
+            CloudVendor existingVendor = existingVendorOpt.get();
+            existingVendor.setVendorName(cloudVendor.getVendorName());
+            existingVendor.setVendorAddress(cloudVendor.getVendorAddress());
+            existingVendor.setVendorPhoneNmber(cloudVendor.getVendorPhoneNmber());
+            return new ResponseEntity<>("Cloud Vendor Updated Successfully", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Vendor Not Found", HttpStatus.NOT_FOUND);
+        }
+    }
+
+   
 	
 }
