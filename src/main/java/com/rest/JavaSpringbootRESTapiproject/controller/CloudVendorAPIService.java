@@ -31,12 +31,11 @@ public class CloudVendorAPIService {
 	        }
 	    }
 	    
-	@PostMapping("/create")
-	public String createCloudVendorDetails(@RequestBody CloudVendor cloudVendor) {
-		
-		this.cloudVendor = cloudVendor;
-		return "Cloud Vendor Created Successfully";
-	}
+	    @PostMapping("/create")
+	    public ResponseEntity<String> createCloudVendorDetails(@RequestBody CloudVendor cloudVendor) {
+	        cloudVendors.add(cloudVendor);
+	        return new ResponseEntity<>("Cloud Vendor Created Successfully", HttpStatus.CREATED);
+	    }
 	
 	@PutMapping("/update/{vendorId}")
     public ResponseEntity<String> updateCloudVendorDetails(@PathVariable("vendorId") String vendorId, @RequestBody CloudVendor cloudVendor) {
