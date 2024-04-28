@@ -48,6 +48,16 @@ public class CloudVendorAPIService {
         }
     }
 
+	 @DeleteMapping("/delete/{vendorId}")
+	    public ResponseEntity<String> deleteCloudVendorDetails(@PathVariable("vendorId") String vendorId) {
+	        boolean removed = cloudVendors.removeIf(cv -> cv.getVendorId().equals(vendorId));
+
+	        if (removed) {
+	            return new ResponseEntity<>("Cloud Vendor Deleted Successfully", HttpStatus.OK);
+	        } else {
+	            return new ResponseEntity<>("Vendor Not Found", HttpStatus.NOT_FOUND);
+	        }
+	    }
    
 	
 }
