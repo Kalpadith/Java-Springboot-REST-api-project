@@ -16,20 +16,26 @@ import com.rest.JavaSpringbootRESTapiproject.model.CloudVendor;
 @RequestMapping ("/cloudvendor")
 public class CloudVendorAPIService {
 
-	CloudVendor cloudVendor;
-	
-	@GetMapping("{VendorId}")
-	public CloudVendor getCloudVendorDetails(String VendorId) {
-		return new CloudVendor("V1", "Ishan  Kalpadith", "Isuru niwasa,Mrungasyaya west,Middeniya.","0769733135");
-		//return cloudVendor;
-	}
-	
-	@PostMapping("/create")
-	public String createCloudVendorDetails(@RequestBody CloudVendor cloudVendor) {
-		
-		this.cloudVendor = cloudVendor;
-		return "Cloud Vendor Created Successfully";
-	}
+	 private List<CloudVendor> cloudVendors = new ArrayList<>();
+
+	    @GetMapping("{vendorId}")
+	    public ResponseEntity<CloudVendor> getCloudVendorDetails(@PathVariable("vendorId") String vendorId) {
+	        Optional<CloudVendor> vendor = cloudVendors.stream()
+	                .filter(cv -> cv.getVendorId().equals(vendorId))
+	                .findFirst();
+
+	        if (vendor.isPresent()) {
+	            return new ResponseEntity<>(vendor.get(), HttpStatus.OK);
+	        } else {
+	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	        }
+	    }
+	    
+	    @PostMapping("/create")
+	    public ResponseEntity<String> createCloudVendorDetails(@RequestBody CloudVendor cloudVendor) {
+	        cloudVendors.add(cloudVendor);
+	        return new ResponseEntity<>("Cloud Vendor Created Successfully", HttpStatus.CREATED);
+	    }
 	
 	@PutMapping("/update/{vendorId}")
     public ResponseEntity<String> updateCloudVendorDetails(@PathVariable("vendorId") String vendorId, @RequestBody CloudVendor cloudVendor) {
